@@ -123,115 +123,111 @@ void createRandomVector(int numNodes){
 
 void outputToFile(string sortType){
 
+int n;
+
 if(sortType == "bubble"){
 		
 		ofs1 << "Vector Configuration, Seconds, # Data Comparisons, # Loop Comparisons, # Data Assignments, # Loop Assignments, # Other, # Total" << endl;
 		
 		// SORTED
-		createSorted(500, sorted);
-		
-		ofs1 << "Sorted N=500" << "," << bubbleTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(1000, sorted);
-		
-		ofs1 << "Sorted N=1000" << "," << bubbleTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(5000, sorted);
-		
-		ofs1 << "Sorted N=5000" << "," << bubbleTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(10000, sorted);
-		
-		ofs1 << "Sorted N=10000" << "," << bubbleTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		for(int i=500; i<=10000; i += n){
+			createSorted(i, sorted);
+			ofs1 << "Sorted N=" << i << "," << bubbleTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+			if(i==500){
+				n = 500;
+			} else if(i==1000){
+				n = 4000;
+			} else if(i==5000){
+				n = 5000;
+			}
+		}
 		
 		// DESCENDING SORTED
-		createReverseSorted(500, reverseSorted);
-		
-		ofs1 << "Descending sorted N=500" << "," << bubbleTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(1000, reverseSorted);
-		
-		ofs1 << "Descending sorted N=1000" << "," << bubbleTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(5000, reverseSorted);
-		
-		ofs1 << "Descending sorted N=5000" << "," << bubbleTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(10000, reverseSorted);
-		
-		ofs1 << "Descending sorted N=10000" << "," << bubbleTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		for(int i=500; i<=10000; i += n){
+			createReverseSorted(i, reverseSorted);
+			ofs1 << "Descending sorted N=" << i << "," << bubbleTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+			if(i==500){
+				n = 500;
+			} else if(i==1000){
+				n = 4000;
+			} else if(i==5000){
+				n = 5000;
+			}
+		}
 		
 		// RANDOM
-		performBubbleSort(randomVec500);
-		
-		ofs1 << "Random N=500" << "," << bubbleTimer(randomVec500) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performBubbleSort(randomVec1000);
-		
-		ofs1 << "Random N=1000" << "," << bubbleTimer(randomVec1000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performBubbleSort(randomVec5000);
-		
-		ofs1 << "Random N=5000" << "," << bubbleTimer(randomVec5000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performBubbleSort(randomVec10000);
-		
-		ofs1 << "Random N=10000" << "," << bubbleTimer(randomVec10000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		vector<int> vec;
+		for(int i=500; i<=10000; i +=n){
+			if(i==500){
+				n = 500;
+				vec = randomVec500;
+				performBubbleSort(vec);
+			} else if(i==1000){
+				n = 4000;
+				vec = randomVec1000;
+				performBubbleSort(vec);
+			} else if(i==5000){
+				n = 5000;
+				vec = randomVec5000;
+				performBubbleSort(vec);
+			} else if(i==10000){
+				vec = randomVec10000;
+				performBubbleSort(vec);
+			}
+			ofs1 << "Random N=" << i << "," << bubbleTimer(vec) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		}
 		
 	} else if(sortType == "selection"){
 		
 		ofs2 << "Vector Configuration, Seconds, # Data Comparisons, # Loop Comparisons, # Data Assignments, # Loop Assignments, # Other, # Total" << endl;
 		
 		// SORTED
-		createSorted(500, sorted);
-		
-		ofs2 << "Sorted N=500" << "," << selectionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(1000, sorted);
-		
-		ofs2 << "Sorted N=1000" << "," << selectionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(5000, sorted);
-		
-		ofs2 << "Sorted N=5000" << "," << selectionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(10000, sorted);
-		
-		ofs2 << "Sorted N=10000" << "," << selectionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		for(int i=500; i<=10000; i += n){
+			createSorted(i, sorted);
+			ofs2 << "Sorted N=" << i << "," << selectionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+			if(i==500){
+				n = 500;
+			} else if(i==1000){
+				n = 4000;
+			} else if(i==5000){
+				n = 5000;
+			}
+		}
 		
 		// DESCENDING SORTED
-		createReverseSorted(500, reverseSorted);
-		
-		ofs2 << "Descending sorted N=500" << "," << selectionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(1000, reverseSorted);
-		
-		ofs2 << "Descending sorted N=1000" << "," << selectionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(5000, reverseSorted);
-		
-		ofs2 << "Descending sorted N=5000" << "," << selectionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(10000, reverseSorted);
-		
-		ofs2 << "Descending sorted N=10000" << "," << selectionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		for(int i=500; i<=10000; i += n){
+			createReverseSorted(i, reverseSorted);
+			ofs2 << "Descending sorted N=" << i << "," << selectionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+			if(i==500){
+				n = 500;
+			} else if(i==1000){
+				n = 4000;
+			} else if(i==5000){
+				n = 5000;
+			}
+		}
 		
 		// RANDOM
-		performSelectionSort(randomVec500);
-		
-		ofs2 << "Random N=500" << "," << selectionTimer(randomVec500) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performSelectionSort(randomVec1000);
-		
-		ofs2 << "Random N=1000" << "," << selectionTimer(randomVec1000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performSelectionSort(randomVec5000);
-		
-		ofs2 << "Random N=5000" << "," << selectionTimer(randomVec5000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performSelectionSort(randomVec10000);
-		
-		ofs2 << "Random N=10000" << "," << selectionTimer(randomVec10000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+	vector<int> vec;
+		for(int i=500; i<=10000; i +=n){
+			if(i==500){
+				n = 500;
+				vec = randomVec500;
+				performSelectionSort(vec);
+			} else if(i==1000){
+				n = 4000;
+				vec = randomVec1000;
+				performSelectionSort(vec);
+			} else if(i==5000){
+				n = 5000;
+				vec = randomVec5000;
+				performSelectionSort(vec);
+			} else if(i==10000){
+				vec = randomVec10000;
+				performSelectionSort(vec);
+			}
+			ofs2 << "Random N=" << i << "," << selectionTimer(vec) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		}
 		
 		
 	} else if(sortType == "insertion"){
@@ -239,55 +235,52 @@ if(sortType == "bubble"){
 		ofs3 << "Vector Configuration, Seconds, # Data Comparisons, # Loop Comparisons, # Data Assignments, # Loop Assignments, # Other, # Total" << endl;
 		
 		// SORTED
-		createSorted(500, sorted);
-		
-		ofs3 << "Sorted N=500" << "," << insertionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(1000, sorted);
-		
-		ofs3 << "Sorted N=1000" << "," << insertionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(5000, sorted);
-		
-		ofs3 << "Sorted N=5000" << "," << insertionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createSorted(10000, sorted);
-		
-		ofs3 << "Sorted N=10000" << "," << insertionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		for(int i=500; i<=10000; i += n){
+			createSorted(i, sorted);
+			ofs3 << "Sorted N=" << i << "," << insertionTimer(sorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+			if(i==500){
+				n = 500;
+			} else if(i==1000){
+				n = 4000;
+			} else if(i==5000){
+				n = 5000;
+			}
+		}
 		
 		// DESCENDING SORTED
-		createReverseSorted(500, reverseSorted);
-		
-		ofs3 << "Descending sorted N=500" << "," << insertionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(1000, reverseSorted);
-		
-		ofs3 << "Descending sorted N=1000" << "," << insertionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(5000, reverseSorted);
-		
-		ofs3 << "Descending sorted N=5000" << "," << insertionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		createReverseSorted(10000, reverseSorted);
-		
-		ofs3 << "Descending sorted N=10000" << "," << insertionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		for(int i=500; i<=10000; i += n){
+			createReverseSorted(i, reverseSorted);
+			ofs3 << "Descending sorted N=" << i << "," << insertionTimer(reverseSorted) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+			if(i==500){
+				n = 500;
+			} else if(i==1000){
+				n = 4000;
+			} else if(i==5000){
+				n = 5000;
+			}
+		}
 		
 		// RANDOM
-		performInsertionSort(randomVec500);
-		
-		ofs3 << "Random sorted N=500" << "," << insertionTimer(randomVec500) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performInsertionSort(randomVec1000);
-		
-		ofs3 << "Random sorted N=1000" << "," << insertionTimer(randomVec1000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performInsertionSort(randomVec5000);
-		
-		ofs3 << "Random sorted N=5000" << "," << insertionTimer(randomVec5000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
-		
-		performInsertionSort(randomVec10000);
-		
-		ofs3 << "Random sorted N=10000" << "," << insertionTimer(randomVec10000) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		vector<int> vec;
+		for(int i=500; i<=10000; i +=n){
+			if(i==500){
+				n = 500;
+				vec = randomVec500;
+				performInsertionSort(vec);
+			} else if(i==1000){
+				n = 4000;
+				vec = randomVec1000;
+				performInsertionSort(vec);
+			} else if(i==5000){
+				n = 5000;
+				vec = randomVec5000;
+				performInsertionSort(vec);
+			} else if(i==10000){
+				vec = randomVec10000;
+				performInsertionSort(vec);
+			}
+			ofs3 << "Random N=" << i << "," << insertionTimer(vec) << "," << dataComp << "," << loopCtrl << "," << dataAO << "," << loopCtrlAO << "," << other << "," << total << endl;
+		}
 		
 	}
 }
